@@ -1,0 +1,179 @@
+doctype html
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="js/mapTool.js")
+        script(type="text/javascript",src="js/ajax.js")
+        script(type="text/javascript",src="js/domEvent.js")
+        script(type="text/javascript",src="js/createDom.js")
+        script(type="text/javascript",src="js/tool/Time.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u",crossorigin="anonymous")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css",integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp",crossorigin="anonymous")
+        script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ,integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,crossorigin="anonymous")
+        link(rel='stylesheet', href='public/style/layout.css')
+        link(rel='stylesheet', href='public/style/switch.css')
+        link(rel='stylesheet', href='public/style/lineSlider.css')
+        link(rel='stylesheet', href='public/style/svgStyle.css')
+        link(rel='stylesheet', href='public/style/route-area.css')
+        
+        link(rel='stylesheet', href='public/style/roundslider.min.css')
+        link(rel='stylesheet', href='public/style/custom_roundslider.css')
+        script(type="text/javascript",src="public/js/roundslider.min.js")
+        style(type="text/css").
+            .notEdit{
+                display: none;
+            }
+            .editElemt{
+
+            }
+            .random-poi{
+                //- background-color:yellow;
+                width:100px;
+                height:50px;
+            }
+            #sortable_main, #sortable_recomd, .random-poi{
+                z-index:2 !important;
+                background-color:yellow;
+                width:20%;
+            }
+            .back{
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+                right: 0px;
+                background:#70CCB8;
+            }
+            .fc{
+                display:flex;
+                //- background-color:yellow;
+            }
+            .right{
+                margin-left: auto;
+            }
+            .push{
+                margin-left: auto;
+            }
+
+
+    body()
+        h1 dragDropSortableTest
+        div(class="back")
+        div(class="fc")
+            div(id="sortable_main" class="connectedSortable")
+                div(id="a1" data-poi='{"name":"西門","id":"ABCDE"}') 西門
+                    button(class="editElemt remove",data-poi-id="a1") remove
+                div(id="a2") 小南門
+                    button(class="editElemt remove",data-poi-id="a2") remove
+                div(id="a3") 東吳大學
+                    button(class="editElemt remove",data-poi-id="a3") remove
+                div(id="a4") 台科大
+                    button(class="editElemt remove",data-poi-id="a4") remove
+                div(id="a5") 永春高中
+                    button(class="editElemt remove",data-poi-id="a5") remove
+            div(class="random-poi push") Rand
+                button(class="editElemt notEdit remove-random") remove
+            div(id="sortable_recomd" class="connectedSortable")
+                div(id="a6") 國賓戲院
+                    button(class="editElemt notEdit remove",data-poi-id="a6") remove
+                div(id="a7") 老松國小
+                    button(class="editElemt notEdit remove",data-poi-id="a7") remove
+                div(id="a8") 阿桂排骨麵
+                    button(class="editElemt notEdit remove",data-poi-id="a8") remove
+                div(id="a9") 滷肉飯
+                    button(class="editElemt notEdit remove",data-poi-id="a9") remove
+                div(id="a10") 西瓜汁
+                    button(class="editElemt notEdit remove",data-poi-id="a10") remove
+
+    Script.
+            $(function() {
+                let maxDepth = 5;
+                $("#sortable_main").sortable({
+                    connectWith: ".connectedSortable",
+                    stop: function( event, ui ) {
+                        console.log($("#sortable_main>div").length);
+                        console.log(this);
+                        console.log($(ui.item).parent()[0]);
+                        if($(ui.item).parent()[0] != this && $("#sortable_main>div").length>=maxDepth){
+                            $(ui.item).remove();
+                            console.log("remove");
+                        }else{
+                             $(ui.item).find(">.editElemt").show();
+                            console.log("not remove");
+                        }
+
+                        if($(ui.item).parent()[0] != this) {
+                            let id = $(ui.item).attr("id");
+                            hideEditElemt(id);
+                        }
+                    },
+                    cancel:".random-poi"
+                })
+                $("#sortable_recomd").sortable({
+                    connectWith: ".connectedSortable",
+                    stop: function( event, ui ) {
+                        if($(ui.item).parent()[0] == this || $("#sortable_main>div").length-1>=maxDepth) {
+                            //- console.log("==this");
+                            console.log($("#sortable_main>div").length);
+                            $(this).sortable('cancel');
+                        }else{
+                            //- console.log("!=this");
+                            let id = $(ui.item).attr("id");
+                            showEditElemt(id);
+                        }
+                    }
+                })
+                function showEditElemt(id){
+                    $("#"+id+">.editElemt").show();
+                }
+                function hideEditElemt(id){
+                    $("#"+id+">.editElemt").hide();
+                }
+                $(".random-poi").draggable({
+                    connectToSortable: "#sortable_main",
+                    helper: "clone",
+                    start: function(event,ui){
+                        $(ui.helper).find(".remove-random").click(function(){
+                                console.log( $(this));
+                                $(this).parent().hide("fade", function () {
+                                    $(this).remove();
+                                    console.log("remove");
+                                });
+                                console.log("remove");
+                        })
+                    }
+                });
+                $(".remove").click(function(){
+                    let poiId = $(this).data("poi-id");
+                    console.log(poiId);
+                    
+                    let clone = $("#"+poiId).clone(true,true);
+                    $("#"+poiId).hide("fade", function () {
+                        $(this).remove();
+                        console.log("remove");
+                    });
+                    $("#sortable_recomd").append(clone);
+                    hideEditElemt(poiId);
+                    $("#sortable_recomd").sortable('refresh');
+
+                    
+                    //- console.log($("#a1").data("poi"));
+                    //- let data = $("#a1").data("poi");
+                    //- data.name="中正國寶";
+                    //- $("#a1").data("poi",data);
+                    //- console.log($("#a1").data("poi"));
+                });
+                
+                $("#sortable_main").disableSelection();
+            });
+ 
+
+          
+
+
+
+                    

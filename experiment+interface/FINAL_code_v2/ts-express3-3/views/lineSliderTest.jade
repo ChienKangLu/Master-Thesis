@@ -1,0 +1,46 @@
+doctype html
+//- referance https://www.w3schools.com/howto/howto_js_rangeslider.asp
+//- referance http://www.oxxostudio.tw/articles/201503/html5-input-range-style.html
+//- referance https://codepen.io/trevanhetzel/pen/rOVrGK
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato')
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+
+        link(rel='stylesheet', href='public/style/lineSlider.css')
+        script(type="text/javascript",src="js/domEvent.js")
+    body
+        div hello world
+        input(type="range",min="2",max="7",value="3",class="lineSlider",id="myRange")
+        p Value:
+            span(id="demo")
+
+    Script.
+        let domevent = new domEvent();
+        //- $(function(){
+        //-     var r = $('#myRange');
+        //-     r.on('mouseenter',function(){
+        //-         var p = r.val();
+        //-         r.on('click',function(){
+        //-             p = r.val();
+        //-             bg(p);
+        //-         });
+        //-         r.on('mousemove',function(){
+        //-             p = r.val();
+        //-             bg(p);
+        //-         });
+        //-     });
+        //-     function bg(n){
+        //-         r.css({
+        //-             'background-image':'-webkit-linear-gradient(left ,var(--coverColor) 0%,var(--coverColor) '+n+'%,#fff '+n+'%, #fff 100%)'
+        //-         });
+        //-     };
+        //- });
+          
+
+
+
+                    

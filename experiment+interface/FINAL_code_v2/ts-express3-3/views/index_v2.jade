@@ -1,0 +1,190 @@
+doctype html
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato')
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="js/mapTool.js")
+        script(type="text/javascript",src="js/ajax.js")
+        script(type="text/javascript",src="js/domEvent.js")
+        script(type="text/javascript",src="js/createDom.js")
+        script(type="text/javascript",src="js/tool/Time.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u",crossorigin="anonymous")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css",integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp",crossorigin="anonymous")
+        script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ,integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,crossorigin="anonymous")
+        link(rel='stylesheet', href='public/style/layout.css')
+        link(rel='stylesheet', href='public/style/switch.css')
+        link(rel='stylesheet', href='public/style/lineSlider.css')
+        
+        link(rel='stylesheet', href='public/style/roundslider.min.css')
+        link(rel='stylesheet', href='public/style/custom_roundslider.css')
+        script(type="text/javascript",src="public/js/roundslider.min.js")
+    body
+        div(class="container")
+            div(class="row")
+                div(class="header text-left")
+                    p Trip Planning 
+                        span(style="font-size:20px") online
+            hr(class="divide")            
+            div(class="row")
+                div(class="col-md-6 col-sm-12 col-xs-12")
+                    div(class="row")
+                        div(class="col-md-6 col-sm-6 col-xs-6")
+                            div(class="row center date")
+                                div(class="col-xs-2") 
+                                    div(class="text-center myFont") Start
+                                div(class="col-xs-10")
+                                    input(type="datetime-local",class="form-control",id="start_time",value="2017-11-30T08:00:00")
+                            div(class="row center date")
+                                div(class="col-xs-2") 
+                                    div(class="text-center myFont") End
+                                div(class="col-xs-10")
+                                    input(type="datetime-local",class="form-control",id="end_time",value="2017-11-30T20:00:00")
+                        div(class="col-md-6 col-sm-6 col-xs-6")
+                            div(class="row center where")
+                                div(class="col-xs-3") 
+                                    div(class="text-center myFont") From
+                                div(class="col-xs-9")
+                                    select(id="start_id" class="form-control")
+                                        each value, key in pois
+                                            if(value._id=="59e5a929d63dcb19ac985ad2")
+                                                option(id=value._id,selected="selected")=value.name
+                                            else
+                                                option(id=value._id) #{key+1} #{value.name}
+                            div(class="row center where")
+                                div(class="col-xs-3") 
+                                    div(class="text-center myFont") To
+                                div(class="col-xs-9")
+                                    select(id="destination_id" class="form-control")
+                                        each value, key in pois
+                                            if(value._id=="59e5a86ad63dcb19ac98482b")
+                                                option(id=value._id,selected="selected")=value.name
+                                            else
+                                                option(id=value._id) #{key+1} #{value.name}
+                   
+                    hr(class="divide")
+                    div(class="row")
+                        div(class="col-md-12 col-sm-12 col-xs-12")
+                            input(type="range",min="2",max="7",value="3",step="1",class="lineSlider center",id="myRange")
+                            div(class="text-center")
+                                ul(class="range-labels")
+                                    li 2
+                                    li(class="active") 3
+                                    li 4
+                                    li 5
+                                    li 6
+                                    li 7
+                    hr(class="divide")
+                    div(class="row")
+                        div(class="col-md-4 col-sm-4 col-xs-4")
+                            div(id="slider-attracion")
+                        div(class="col-md-4 col-sm-4 col-xs-4")
+                            div(id="slider-distance")
+                        div(class="col-md-4 col-sm-4 col-xs-4")
+                            div(id="slider-traveltime")
+                    hr(class="divide")
+                    div(class="row")
+                        div(class="col-md-5 col-sm-6 col-xs-6")
+                            div(class="row console-block center")
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Search Time
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="excutionTime") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Total Atraction
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="total_attraction") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Total Distance
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="total_distance") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Toal TravelTime
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="total_travelTime") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Trip Duration
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="trip_duration") -
+                        div(class="col-md-7 col-sm-6 col-xs-6")
+                            div(class="row path-block center",id="show_path")  
+                                div(class="text-center")
+                                    span(class="note")
+                                        img(src="public/img/note.svg")
+                                //- div(class=" col-xs-12") 
+                                //-     div(class="time-line start-time-line")
+                                //-     div(class="time-block start-time") 08:00:00
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line arrive-time-line")
+                                //-     div(class="time-block arrive-time") 8:30:00
+                                //- div(class=" col-xs-12")
+                                //-     div(class="poi-block") 
+                                //-         div(class="poi-title") 西門町(西本願寺鐘)
+                                //-         div(class="visit-hour") 1 hr
+                                //-         div(class="poi-rating") 4.5
+                                        
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line arrive-time-line")
+                                //-     div(class="time-block arrive-time") 09:30:00
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line travel-time-line")
+                                //-     div(class="duration travel-duration") 1.5 hr
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line wait-time-line")
+                                //-     div(class="duration wait-duration") 30 min
+                div(class="col-md-6 col-sm-12 col-xs-12") 
+                    div(class="row")
+                        div(class="col-md-12 col-sm-12 col-xs-12")
+                            div(id="map",class="center margin-botton")
+                    //- div(class="row")
+                    //-      div(class="col-md-12 col-sm-12 col-xs-12 text-right")
+                    //-         a(id="clearMap",class="flat-btn btn-b",type="submit") clearMap
+                    div(class="row map-control")                           
+                        div(class="col-md-3 col-sm-3 col-xs-3")
+                            select(id="icon_color" class="form-control")
+                                option(id="green",selected="selected") green
+                                option(id="blue") blue
+                                option(id="red") red
+                                option(id="yellow") yellow
+                        div(class="col-md-3 col-sm-3 col-xs-3")
+                            select(id="edge_color" class="form-control")
+                                option(id="green",selected="selected") green
+                                option(id="blue") blue
+                                option(id="red") red
+                                option(id="yellow") yellow
+                                
+                        div(class="col-md-4 col-sm-4 col-xs-4")
+                        div(class="col-md-2 col-sm-2 col-xs-2")
+                            //- button(type="button",class="btn btn-default ",id="clearMap") clearMap
+                            a(id="clearMap",class="flat-btn btn-b",type="submit") clearMap             
+            hr
+            br
+        Script.
+            let  maptool = new mapTool();
+            maptool.initMap();
+            domEvent.sess = !{JSON.stringify(sess)}
+            let domevent = new domEvent(maptool);
+            
+
+          
+
+
+
+                    

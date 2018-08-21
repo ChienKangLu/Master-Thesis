@@ -1,0 +1,253 @@
+doctype html
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato')
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="js/mapTool.js")
+        script(type="text/javascript",src="js/ajax.js")
+        script(type="text/javascript",src="js/domEvent.js")
+        script(type="text/javascript",src="js/createDom.js")
+        script(type="text/javascript",src="js/tool/Time.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u",crossorigin="anonymous")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css",integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp",crossorigin="anonymous")
+        script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ,integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,crossorigin="anonymous")
+        link(rel='stylesheet', href='public/style/layout.css')
+        link(rel='stylesheet', href='public/style/switch.css')
+    body
+        div(class="container")
+            div(class="row")
+                div(class="header text-left")
+                    p Trip Planning
+            //- div(class="row")
+            //-     div(class="col-md-4 col-sm-6 col-xs-6")
+            //-         h4(class="text-center") City
+            //-         hr(class="title")
+            //-         div(class="row center city")
+            //-             select(id="city" class="form-control" multiple="multiple")
+            //-                 each value, key in cities
+            //-                     option=value._id
+            //-     div(class="col-md-4 col-sm-6 col-xs-6")
+            //-         h4(class="text-center") Type
+            //-         hr(class="title")
+            //-         div(class="row center city")
+            //-             select(id="city" class="form-control" multiple="multiple")
+            //-                 each value, key in types
+            //-                     option=value._id
+
+            //-     div(class="col-md-4 col-sm-6 col-xs-6")
+            //-         h4(class="text-center") Tag
+            //-         hr(class="title")
+            //-         div(class="row center city")
+            //-             select(id="city" class="form-control" multiple="multiple")
+            //-                 each value, key in classes
+            //-                     option=value._id
+            //- <br/>
+            //- hr(class="divide")
+            div(class="row")
+                div(class="col-md-4 col-sm-6 col-xs-6")
+                    h4(class="text-center") Date
+                    hr(class="title")
+                    div(class="row center date")
+                        div(class="col-xs-2") 
+                            div(class="text-center myFont") Start
+                        div(class="col-xs-10")
+                            input(type="datetime-local",class="form-control",id="start_time",value="2017-11-30T08:00:00")
+                    div(class="row center date")
+                        div(class="col-xs-2") 
+                            div(class="text-center myFont") End
+                        div(class="col-xs-10")
+                            input(type="datetime-local",class="form-control",id="end_time",value="2017-11-30T20:00:00")
+                div(class="col-md-3 col-sm-6 col-xs-6")
+                    h4(class="text-center") Where
+                    hr(class="title")
+                    div(class="row center where")
+                        div(class="col-xs-3") 
+                            div(class="text-center myFont") From
+                        div(class="col-xs-9")
+                            select(id="start_id" class="form-control")
+                                each value, key in pois
+                                    if(value._id=="59e5a929d63dcb19ac985ad2")
+                                        option(id=value._id,selected="selected")=value.name
+                                    else
+                                        option(id=value._id) #{key+1} #{value.name}
+                    div(class="row center where")
+                        div(class="col-xs-3") 
+                            div(class="text-center myFont") To
+                        div(class="col-xs-9")
+                            select(id="destination_id" class="form-control")
+                                each value, key in pois
+                                    if(value._id=="59e5a86ad63dcb19ac98482b")
+                                        option(id=value._id,selected="selected")=value.name
+                                    else
+                                        option(id=value._id) #{key+1} #{value.name}
+                div(class="col-md-2 col-sm-6 col-xs-6")
+                    h4(class="text-center") Depth
+                    hr(class="title")
+                    div(class="row center depth")
+                        input(type="number",class="form-control",id="depthLimit",value="5")
+                div(class="col-md-3 col-sm-6 col-xs-6")
+                    h4(class="text-center") Priority
+                    hr(class="title")
+                    div(class="row center priority")
+                        div(class="col-xs-7") 
+                            div(class="text-center myFont") Attraction
+                        div(class="col-xs-5")
+                            input(type="number",class="form-control",id="Attraction",value="0")
+                    div(class="row center priority")
+                        div(class="col-xs-7") 
+                            div(class="text-center myFont") Distance
+                        div(class="col-xs-5")
+                            input(type="number",class="form-control",id="Distance",value="-1")
+                    div(class="row center priority")
+                        div(class="col-xs-7") 
+                            div(class="text-center myFont") TravelTime
+                        div(class="col-xs-5")
+                            input(type="number",class="form-control",id="TravelTime",value="-1")
+            
+            
+            div(class="row")
+                div(class="col-md-12 text-center search-row")
+                    a(id="search",class="flat-btn btn-b",type="submit") Search
+            hr(class="divide")
+            div(class="row ")           
+                div(class="col-md-4 col-sm-6 col-xs-6")
+                    div(class="col-xs-4") 
+                        div(class="text-center myFont") From ID
+                    div(class="col-xs-8")
+                        input(type="text",class="form-control margin-botton",id="fromid")
+                        pre(id="id_search_from_name")
+   
+                div(class="col-md-4 col-sm-6 col-xs-6")
+                    div(class="col-xs-4") 
+                        div(class="text-center myFont") To ID
+                    div(class="col-xs-8")
+                        input(type="text",class="form-control margin-botton",id="toid")
+                        pre(id="id_search_to_name")
+                        
+                div(class="col-md-4 col-sm-6 col-xs-6")
+                    a(id="searchbyID",class="flat-btn btn-b",type="submit") Search by ID
+            hr(class="divide")
+            div(class="row ")           
+                div(class="col-md-4 col-sm-6 col-xs-6")
+                    div(class="col-xs-4") 
+                        div(class="text-center myFont") Heuristic
+                    div(class="col-xs-8")
+                        label(class="switch")
+                            input(id="heuristic_gate",type="checkbox")
+                            span(class="slider round")           
+                div(class="col-md-4 col-sm-6 col-xs-6")
+                    div(class="col-xs-4") 
+                        div(class="text-center myFont") km15
+                    div(class="col-xs-8")
+                        label(class="switch")
+                            input(id="km15_gate",type="checkbox")
+                            span(class="slider round")
+            hr(class="divide")
+            div(class="row center  margin-botton")
+                div(class="col-md-3 col-sm-6 col-xs-6")
+                    input(type="text",class="form-control",id="dbName" placeholder="dbName" value="experiment_1000")
+                div(class="col-md-3 col-sm-6 col-xs-6")
+                    input(type="text",class="form-control",id="collName" placeholder="collName" value="exp_expectation-heuristic")
+                div(class="col-md-2 col-sm-6 col-xs-6")
+                    input(type="number",class="form-control",id="index" placeholder="index" value="1")
+                div(class="col-md-2 col-sm-6 col-xs-6")
+                    input(type="number",class="form-control",id="depth" placeholder="depth" value="2")              
+                div(class="col-md-2 col-sm-6 col-xs-6")
+                    a(id="Showexp",class="flat-btn btn-b",type="submit") Show Exp
+            div(class="row center exp_history")
+                div(class="col-md-3 col-sm-6 col-xs-6")
+                    ul(id="exp_dbName",class="list-group")
+                div(class="col-md-3 col-sm-6 col-xs-6")
+                    ul(id="exp_collName",class="list-group")
+                div(class="col-md-2 col-sm-6 col-xs-6")
+                    ul(id="exp_index",class="list-group")
+                div(class="col-md-2 col-sm-6 col-xs-6")
+                    ul(id="exp_depth",class="list-group")
+                div(class="col-md-1 col-sm-6 col-xs-6")
+                    ul(id="exp_search_again",class="list-group")
+            
+            hr(class="divide")
+            div(class="row")
+                div(class="col-md-12 col-sm-12 col-xs-12")
+                    div(id="map",class="center")
+            hr(class="divide")
+            div(class="row")
+                div(class="col-md-6 col-sm-6 col-xs-6")
+                    div(class="row console-block center")
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                div(class="col-xs-6 text-center") 
+                                    h4 Search Time
+                                div(class="col-xs-6 text-center") 
+                                    h4(id="excutionTime") 12 sec 01 msec
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                div(class="col-xs-6 text-center") 
+                                    h4 Total Atraction
+                                div(class="col-xs-6 text-center") 
+                                    h4(id="total_attraction") 15.30
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                div(class="col-xs-6 text-center") 
+                                    h4 Total Distance
+                                div(class="col-xs-6 text-center") 
+                                    h4(id="total_distance") 8.75 km
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                div(class="col-xs-6 text-center") 
+                                    h4 Toal TravelTime
+                                div(class="col-xs-6 text-center") 
+                                    h4(id="total_travelTime") 07 min 29 sec 09 msec
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                div(class="col-xs-6 text-center") 
+                                    h4 Trip Duration
+                                div(class="col-xs-6 text-center") 
+                                    h4(id="trip_duration") 07 hr 07 min 29 sec 09 msec
+                div(class="col-md-6 col-sm-6 col-xs-6")
+                    div(class="row path-block center",id="show_path")                     
+                        div(class=" col-xs-12") 
+                            div(class="time-line start-time-line")
+                            div(class="time-block start-time") 08:00:00
+                        div(class=" col-xs-12")
+                            div(class="time-line arrive-time-line")
+                            div(class="time-block arrive-time") 8:30:00
+                        div(class=" col-xs-12")
+                            div(class="poi-block") 
+                                div(class="poi-title") 西門町(西本願寺鐘)
+                                div(class="visit-hour") 1 hr
+                                div(class="poi-rating") 4.5
+                                
+                        div(class=" col-xs-12")
+                            div(class="time-line arrive-time-line")
+                            div(class="time-block arrive-time") 09:30:00
+                        div(class=" col-xs-12")
+                            div(class="time-line travel-time-line")
+                            div(class="duration travel-duration") 1.5 hr
+                        div(class=" col-xs-12")
+                            div(class="time-line wait-time-line")
+                            div(class="duration wait-duration") 30 min
+
+
+            //- div(class="row")
+            //-     div(class="row",style="width:200px;margin:auto;")
+            //-         div(class="col-xs-5")
+            //-             div(style="width:30px;margin:auto") hello2
+            //-         div(class="col-xs-7")
+            //-             div(style="width:30px;margin:auto") hello3
+            hr
+        Script.
+            let  maptool = new mapTool();
+            maptool.initMap();
+            domEvent.sess = !{JSON.stringify(sess)}
+            let domevent = new domEvent(maptool);
+            
+
+          
+
+
+
+                    

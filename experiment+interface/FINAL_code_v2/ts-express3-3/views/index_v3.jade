@@ -1,0 +1,279 @@
+doctype html
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="js/mapTool.js")
+        script(type="text/javascript",src="js/ajax.js")
+        script(type="text/javascript",src="js/domEvent.js")
+        script(type="text/javascript",src="js/createDom.js")
+        script(type="text/javascript",src="js/tool/Time.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u",crossorigin="anonymous")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css",integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp",crossorigin="anonymous")
+        script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ,integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,crossorigin="anonymous")
+        link(rel='stylesheet', href='public/style/layout.css')
+        link(rel='stylesheet', href='public/style/switch.css')
+        link(rel='stylesheet', href='public/style/lineSlider.css')
+        link(rel='stylesheet', href='public/style/svgStyle.css')
+        link(rel='stylesheet', href='public/style/route-area.css')
+        link(rel='stylesheet', href='public/style/recomd-area.css')
+        
+        link(rel='stylesheet', href='public/style/roundslider.min.css')
+        link(rel='stylesheet', href='public/style/custom_roundslider.css')
+        script(type="text/javascript",src="public/js/roundslider.min.js")
+    body()
+        div(id="map",class="map-v3")
+        div(class="container header-content")
+            div(class="row")
+                div(class="header")
+                    p Trip Planning 
+                        span(class="header-small-txt") online
+            //- hr(class="divide")
+        div(class="tool-area")
+            img(id="datetime",class="datetime self-icon icon-active",src="public/img/datetime.svg")
+            img(id="poi",class="poi self-icon",src="public/img/poi.svg")
+            img(id="gear",class="gear self-icon",src="public/img/gear.svg")
+            img(id="note",class="note self-icon",src="public/img/note.svg")
+            img(id="analysis",class="analysis self-icon",src="public/img/analysis.svg")
+
+        div(class="container op-area basic-area")
+            div(class="row date")
+                div(class="col-xs-12 font-input-group")
+                    div(class="myFont") Start
+                    input(type="datetime-local",class="form-control",id="start_time",value="2017-11-30T08:00:00")
+            div(class="row date")
+                div(class="col-xs-12 font-input-group")
+                    div(class="myFont") End
+                    input(type="datetime-local",class="form-control",id="end_time",value="2017-11-30T20:00:00")
+            div(class="row where mobile-poi")
+                div(class="col-xs-12 font-input-group")
+                    div(class="myFont") From
+                    select(id="start_id_mobile" class="form-control")
+                        each value, key in pois
+                            if(value._id=="59e5a921d63dcb19ac9859fc")
+                                option(id=value._id,selected="selected")=value.name
+                            else
+                                option(id=value._id) #{key+1} #{value.name}
+            div(class="row where pc-poi")
+                div(class="col-xs-12 font-input-group")
+                    div(class="myFont") From
+                    input(type="text" name="team" id="start_id_pc" list="start_list" class="form-control" value="宜蘭車站") 
+                    datalist(id="start_list")
+                        each value, key in pois
+                            option(id=value._id) #{value.name} 
+            div(class="row where mobile-poi")
+                div(class="col-xs-12 font-input-group")
+                    div(class="myFont") To
+                    select(id="destination_id_mobile" class="form-control")
+                        each value, key in pois
+                            if(value._id=="59e5a84dd63dcb19ac984571")
+                                option(id=value._id,selected="selected")=value.name
+                            else
+                                option(id=value._id) #{key+1} #{value.name}     
+            div(class="row where pc-poi")
+                div(class="col-xs-12 font-input-group")
+                    div(class="myFont") To
+                    input(type="text" name="team" id="destination_id_pc" list="destination_list" class="form-control" value="養蜂人家-蜂采館") 
+                    datalist(id="destination_list")
+                        each value, key in pois
+                            option(id=value._id) #{value.name} 
+            div(class="row text-right")
+                a(id="search-v3",class="flat-btn btn-b",type="submit") search      
+        div(class="container op-area poi-area hidden")
+            div(class="row")
+                div(class="col-md-12 col-sm-12 col-xs-12")
+                    input(type="range",min="2",max="7",value="3",step="1",class="lineSlider center",id="myRange")
+                    div(class="text-center")
+                        ul(class="range-labels")
+                            li 2
+                            li(class="active") 3
+                            li 4
+                            li 5
+                            li 6
+                            li 7
+            //- hr(class="divide")
+        div(class="container op-area satf-area hidden")
+            div(class="row")
+                div(class="col-md-4 col-sm-12 col-xs-12")
+                    div(id="slider-attracion",class="center")
+                div(class="col-md-4 col-sm-12 col-xs-12")
+                    div(id="slider-distance",class="center")
+                div(class="col-md-4 col-sm-12 col-xs-12")
+                    div(id="slider-traveltime",class="center")
+                
+            //- hr(class="divide")
+            
+        div(class="op-area route-area hidden")
+            div(class="edit-path-container")
+                div(class="edit-container")
+                    img(id="pencil",class="pencil edit",src="public/img/pencil.svg")
+                    img(id="runAgain",class="runAgain edit",src="public/img/runAgain.svg")
+                div(id="show_path",class="path-block connectedSortable")
+                    .time-poi-block
+                        .time-stamp.time-stamp-top
+                            .time-block.time-block-green  08:00:00
+                            .time-line.time-line-green
+                        .time-stamp.time-stamp-bottom
+                            .time-block.time-block-green  09:00:00
+                            .time-line.time-line-green
+                        .poi-block
+                            .poi-title  &#x5B9C;&#x862D;&#x8ECA;&#x7AD9;
+                            .poi-top-info.visit-hour  1 hr
+                            .poi-top-info.poi-rating  4.2
+                    .duration-time-stamp
+                        .time-line.right-line.travel-time-line
+                        .duration.travel-duration  4 min
+                        .duration.travel-duration  0.8km
+                    .time-poi-block
+                        .time-stamp.time-stamp-top
+                            .time-block.time-block-green  09:04:46
+                            .time-line.time-line-green
+                        .time-stamp.time-stamp-bottom
+                            .time-block.time-block-green  10:04:46
+                            .time-line.time-line-green
+                        .poi-block
+                            .poi-title  &#x96D9;&#x9023;&#x57E4;
+                            .poi-top-info.visit-hour  1 hr
+                            .poi-top-info.poi-rating  4.6
+                    .duration-time-stamp
+                        .time-line.right-line.travel-time-line
+                        .duration.travel-duration  4 min
+                        .duration.travel-duration  0.8km
+                    .time-poi-block
+                        .time-stamp.time-stamp-top
+                            .time-block.time-block-green  10:09:08
+                            .time-line.time-line-green
+                        .time-stamp.time-stamp-bottom
+                            .time-block.time-block-green  11:09:08
+                            .time-line.time-line-green
+                        .poi-block
+                            .poi-title  &#x5B9C;&#x862D;&#x8A2D;&#x6CBB;&#x7D00;&#x5FF5;&#x9928;
+                            .poi-top-info.visit-hour  1 hr
+                            .poi-top-info.poi-rating  4.2
+                    .duration-time-stamp
+                        .time-line.right-line.travel-time-line
+                        .duration.travel-duration  11 min
+                        .duration.travel-duration  3.6km
+                    .time-poi-block
+                        .time-stamp.time-stamp-top
+                            .time-block.time-block-green  11:20:18
+                            .time-line.time-line-green
+                        .time-stamp.time-stamp-bottom
+                            .time-block.time-block-green  13:20:18
+                            .time-line.time-line-green
+                        .poi-block
+                            .poi-title  &#x990A;&#x8702;&#x4EBA;&#x5BB6;-&#x8702;&#x91C7;&#x9928;
+                            .poi-top-info.visit-hour  2 hr
+                            .poi-top-info.poi-rating  4.1
+        div(id="recomd-area",class="recomd-area connectedSortable")
+            .time-poi-block
+                .poi-block
+                    .poi-title  &#x96D9;&#x9023;&#x57E4;
+                    .poi-top-info.visit-hour  1 hr
+                    .poi-top-info.poi-rating  4.6
+            .time-poi-block
+                .poi-block
+                    .poi-title  &#x96D9;&#x9023;&#x57E4;
+                    .poi-top-info.visit-hour  1 hr
+                    .poi-top-info.poi-rating  4.6
+            .time-poi-block
+                .poi-block
+                    .poi-title  &#x96D9;&#x9023;&#x57E4;
+                    .poi-top-info.visit-hour  1 hr
+                    .poi-top-info.poi-rating  4.6
+                    //- div
+                    //-     div(class="time-line start-time-line")
+                    //-     div(class="time-block start-time") 08:00:00
+
+
+                    //- div(class="time-poi-block")
+                    //-     div(class="time-stamp time-stamp-top")
+                    //-         div(class="time-block time-block-green") 8:30:00
+                    //-         div(class="time-line time-line-green")
+                    //-     div(class="time-stamp time-stamp-bottom")
+                    //-         div(class="time-block time-block-green") 09:30:00
+                    //-         div(class="time-line time-line-green")
+                    //-     div(class="poi-block")
+                    //-         div(class="poi-title") 西門町(西本願寺鐘)
+                    //-         div(class="poi-top-info visit-hour") 1 hr
+                    //-         div(class="poi-top-info poi-rating") 4.5
+                    //- div(class="duration-time-stamp")
+                    //-     div(class="time-line right-line travel-time-line")
+                    //-     div(class="duration travel-duration") 1.5 hr
+                    //-     div(class="duration travel-duration") 15 km
+                    //- div(class="duration-time-stamp")
+                    //-     div(class="time-line right-line travel-time-line")
+                    //-     div(class="duration travel-not-real") 1.5 hr
+                    //-     div(class="duration travel-not-real") 15 km
+                    //- div(class="duration-time-stamp")
+                    //-     div(class="time-line right-line wait-time-line")
+                    //-     div(class="duration wait-duration") 30 min
+                
+                //- div(class="col-md-6 col-sm-12 col-xs-12")
+                //-     div(class="row map-control")                           
+                //-         div(class="col-md-3 col-sm-3 col-xs-3")
+                //-             select(id="icon_color" class="form-control")
+                //-                 option(id="green",selected="selected") green
+                //-                 option(id="blue") blue
+                //-                 option(id="red") red
+                //-                 option(id="yellow") yellow
+                //-         div(class="col-md-3 col-sm-3 col-xs-3")
+                //-             select(id="edge_color" class="form-control")
+                //-                 option(id="green",selected="selected") green
+                //-                 option(id="blue") blue
+                //-                 option(id="red") red
+                //-                 option(id="yellow") yellow
+                //-         div(class="col-md-4 col-sm-4 col-xs-4")
+                //-         div(class="col-md-2 col-sm-2 col-xs-2")
+                //-             a(id="clearMap",class="flat-btn btn-b",type="submit") clearMap             
+        div(class="container op-area analysis-area hidden")
+            div(class="row console-block center")
+                div(class=" col-xs-12")
+                    div(class="row console-row")
+                        div(class="col-xs-5") 
+                            b(class="text") Search Time
+                        div(class="col-xs-7") 
+                            div(id="excutionTime",class="text-center text") -
+                div(class=" col-xs-12")
+                    div(class="row console-row")
+                        div(class="col-xs-5") 
+                            b(class="text")  Atraction
+                        div(class="col-xs-7") 
+                            div(id="total_attraction",class="text-center text") -
+                div(class=" col-xs-12")
+                    div(class="row console-row")
+                        div(class="col-xs-5") 
+                            b(class="text") Distance
+                        div(class="col-xs-7") 
+                            div(id="total_distance",class="text-center text") -
+                div(class=" col-xs-12")
+                    div(class="row console-row")
+                        div(class="col-xs-5") 
+                            b(class="text")  TravelTime
+                        div(class="col-xs-7") 
+                            div(id="total_travelTime",class="text-center text") -
+                div(class=" col-xs-12")
+                    div(class="row console-row")
+                        div(class="col-xs-5") 
+                            b(class="text")  Duration
+                        div(class="col-xs-7") 
+                            div(id="trip_duration",class="text-center text") -
+        
+
+            
+        Script.
+            let  maptool = new mapTool();
+            maptool.initMap();
+            domEvent.sess = !{JSON.stringify(sess)}
+            let domevent = new domEvent(maptool);
+
+            
+
+          
+
+
+
+                    

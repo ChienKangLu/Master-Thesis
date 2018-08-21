@@ -1,0 +1,7 @@
+.main-flex-container{
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    /* width:70%; */
+    pointer-events:none;
+}

@@ -1,0 +1,58 @@
+.edit-container{
+    display: flex;
+    justify-content: flex-end;
+}
+.edit-switch{
+    margin-bottom: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition:.2s;
+}
+.edit-switch:hover{
+    transform: scale(1.1);
+}
+.edit-switch:hover circle{
+    fill: #39cc94 !important;
+}
+.edit-switch:active circle{
+    fill: #298b66 !important;
+}
+.remove{
+    align-self: center;
+    margin-right: 10px;
+    cursor: pointer;
+    transition:.2s;
+}
+.remove:hover{
+    transform: scale(1.1);
+}
+.remove:hover circle{
+    fill: rgb(255, 54, 32) !important;
+}
+.remove:active circle{
+    fill: rgb(218, 48, 29) !important;
+}
+.editElemt{
+    display: none;
+}
+#path-name{
+    height: 27px;
+    font-size: 16px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    transition: border-color .5s ease-out;
+    color: #686868;
+    -webkit-text-fill-color: #8d8d8d;
+    padding-left: 10px;
+    width: 50%;
+    margin-right: auto;
+    margin-left: 10px;
+    font-family: Microsoft JhengHei; 
+}
+#path-name::-webkit-input-placeholder {
+    color: #999;
+}
+#path-name:focus{
+    outline: none;
+}
+

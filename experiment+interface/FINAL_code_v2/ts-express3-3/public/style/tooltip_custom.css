@@ -1,0 +1,119 @@
+:root{
+    --tooltiptext-width:200px;
+    --tooltiptext-padding-topBottom:5px;
+    --tooltiptext-padding-leftRight:10px;
+
+}
+/* Tooltip container */
+.tooltip_custom {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip_custom .tooltiptext {
+    width:var(--tooltiptext-width);
+    visibility: hidden;
+    position: absolute;
+    background-color: rgba(50, 50, 50, 0.95) ;
+    color: #fff;
+    text-align: center;
+    padding: var(--tooltiptext-padding-topBottom) var(--tooltiptext-padding-leftRight);
+    border-radius: 6px;
+    z-index: 99;
+    opacity: 0;
+    transition: 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+    font-family: Microsoft JhengHei;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip_custom:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+.tooltip-right {
+    top: -5px;
+    left: 20px;
+}
+/*偽元素:長寬為0時，border均分方形四大塊!!!!酷斃!!!!!
+https://www.oxxostudio.tw/articles/201407/css-clock.html*/
+.tooltip-right::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #555 transparent transparent;
+}
+.tooltip-bottom {
+    top: 23px;
+    left: 5.5px;
+    margin-left: calc( ( var(--tooltiptext-width) + var(--tooltiptext-padding-leftRight) ) * -1 / 2 );
+}
+.tooltip-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
+.icon-tooltip{
+    position: relative;
+}
+.icon-tooltip-text{
+    visibility: hidden;
+    position: absolute;
+    width: 70px;
+    background-color: rgba(50, 50, 50, 0.9) ;
+    color:white;
+    text-align: center;
+    border-radius: 9px;
+    z-index: 99;
+    opacity: 0;
+    transition: 0.2s;
+    font-size: 12px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    top: 0px;
+    left: 30px;
+    padding: 4px;
+    letter-spacing: 2px;
+}
+.icon-tooltip:hover .icon-tooltip-text{
+    visibility: visible;
+    opacity: 1;
+}
+.route-icon-tooltip{
+    position: relative;
+}
+.route-icon-tooltip-text{
+    visibility: hidden;
+    position: absolute;
+    background-color: rgba(50, 50, 50, 0.9) ;
+    color:white;
+    text-align: center;
+    border-radius: 9px;
+    z-index: 99;
+    opacity: 0;
+    transition: 0.2s;
+    font-size: 12px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    top: 30px;
+    left: 5px;
+    padding: 3px;
+    letter-spacing: 2px;
+}
+.edit-switch:hover + .route-icon-tooltip-text{
+    visibility: visible;
+    opacity: 1;
+}

@@ -1,0 +1,83 @@
+:root{
+    --header-height:60px;
+    --login-icon-img-width:73.8px;
+    --login-icon-img-height:73.8px;
+    --understand-width:90%;
+    --understand-padding:10px;
+    --color: #14a1bd;
+    --color-hover: #0e7c92;
+}
+.login-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: calc( 100% - var(--header-height));
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 99;
+}
+.login-box{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    position: relative;
+    height:250px;
+    width:300px;
+    background-color: white;
+    border-radius: 10px;
+
+}
+.login-icon{
+    position: absolute;
+    left: calc(50% - var(--login-icon-img-width) / 2 );
+    top: calc( var(--login-icon-img-height) * -1 / 2)
+}
+.beauty-input{
+    font-size: 20px;
+    margin: 0 .25rem;
+    min-width: 125px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    transition: border-color .5s ease-out;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #686868;
+    -webkit-text-fill-color: #8d8d8d;
+}
+.beauty-input::-webkit-input-placeholder {
+    color: #999;
+}
+.beauty-input:focus{
+    outline: none;
+}
+#account{
+    font-family: Microsoft JhengHei; /* Microsoft YaHei;*/
+    align-self: center;
+    margin-top: 65px;
+}
+#password{
+    font-family: Microsoft JhengHei; /* Microsoft YaHei;*/
+    align-self: center;
+    margin-top: 10px;
+}
+.understand{
+    width:var(--understand-width);
+    font-family: Microsoft JhengHei; /* Microsoft YaHei;*/
+    font-weight: 600;
+    position: absolute;
+    left: calc(50% - var(--understand-width) / 2 );
+    bottom: 10px;
+    text-align: center;
+    color: white;
+    padding-top: var(--understand-padding);
+    padding-bottom: var(--understand-padding);
+    border-radius: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.remind-color{
+    background-color: var(--remind-color)
+}

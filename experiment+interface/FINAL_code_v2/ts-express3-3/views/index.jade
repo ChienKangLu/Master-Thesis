@@ -1,0 +1,249 @@
+doctype html
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato')
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="js/mapTool.js")
+        script(type="text/javascript",src="js/ajax.js")
+        script(type="text/javascript",src="js/domEvent.js")
+        script(type="text/javascript",src="js/createDom.js")
+        script(type="text/javascript",src="js/tool/Time.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u",crossorigin="anonymous")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css",integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp",crossorigin="anonymous")
+        script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ,integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,crossorigin="anonymous")
+        link(rel='stylesheet', href='public/style/layout.css')
+        link(rel='stylesheet', href='public/style/switch.css')
+
+        
+        script(type="text/javascript",src="public/js/roundslider.min.js")
+    body
+        div(class="container")
+            div(class="row")
+                div(class="header text-left")
+                    p Trip Planning 
+                        span(style="font-size:20px") experiment
+            hr(class="divide")
+            
+            div(class="row")
+                div(class="col-md-6 col-sm-12 col-xs-12")
+                    div(class="row center  margin-botton")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            input(type="text",class="form-control",id="dbName" placeholder="dbName" value="chapter6_2_1")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            input(type="text",class="form-control",id="collName" placeholder="collName" value="a4+d5+prune+h(8am,8pm)")
+                        div(class="col-md-2 col-sm-2 col-xs-6")
+                            input(type="number",class="form-control",id="index" placeholder="index" value="1")
+                        div(class="col-md-2 col-sm-2 col-xs-6")
+                            input(type="number",class="form-control",id="depth" placeholder="depth" value="3")              
+                        div(class="col-md-2 col-sm-2 col-xs-6 text-center")
+                            a(id="Showexp",class="flat-btn btn-b",type="submit") Show Exp
+                    hr(class="divide")
+                    div(class="row center exp_history")
+                        table(class="table table-striped")
+                            thead
+                                tr
+                                    th dbName
+                                    th collName
+                                    th index
+                                    th depth
+                                    th show
+                            tbody(id="exp_history_table")
+                                //- tr
+                                //-     td chapter3
+                                //-     td 3
+                                //-     td 2
+                                //-     td 3
+                        //- div(class="col-md-3 col-sm-6 col-xs-6")
+                        //-     ul(id="exp_dbName",class="list-group")
+                        //- div(class="col-md-3 col-sm-6 col-xs-6")
+                        //-     ul(id="exp_collName",class="list-group")
+                        //- div(class="col-md-2 col-sm-6 col-xs-6")
+                        //-     ul(id="exp_index",class="list-group")
+                        //- div(class="col-md-2 col-sm-6 col-xs-6")
+                        //-     ul(id="exp_depth",class="list-group")
+                        //- div(class="col-md-1 col-sm-6 col-xs-6")
+                        //-     ul(id="exp_search_again",class="list-group")
+                    hr(class="divide")
+                    //- div(class="row")
+                    //-     div(class="col-md-12 col-sm-12 col-xs-12")
+                    //-         div(id="map",class="center")
+                    //- hr(class="divide")
+                    div(class="row")
+                        div(class="col-md-5 col-sm-6 col-xs-6")
+                            div(class="row console-block center")
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Search Time
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="excutionTime") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Total Atraction
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="total_attraction") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Total Distance
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="total_distance") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Toal TravelTime
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="total_travelTime") -
+                                div(class=" col-xs-12")
+                                    div(class="row center")
+                                        div(class="col-xs-12 text-center") 
+                                            h4 
+                                                b Trip Duration
+                                        div(class="col-xs-12 text-center") 
+                                            h4(id="trip_duration") -
+                        div(class="col-md-7 col-sm-6 col-xs-6")
+                            div(class="row path-block center",id="show_path")  
+                                div(class="text-center")
+                                    span(class="note")
+                                        img(src="public/img/note.svg")
+                                //- div(class=" col-xs-12") 
+                                //-     div(class="time-line start-time-line")
+                                //-     div(class="time-block start-time") 08:00:00
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line arrive-time-line")
+                                //-     div(class="time-block arrive-time") 8:30:00
+                                //- div(class=" col-xs-12")
+                                //-     div(class="poi-block") 
+                                //-         div(class="poi-title") 西門町(西本願寺鐘)
+                                //-         div(class="visit-hour") 1 hr
+                                //-         div(class="poi-rating") 4.5
+                                        
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line arrive-time-line")
+                                //-     div(class="time-block arrive-time") 09:30:00
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line travel-time-line")
+                                //-     div(class="duration travel-duration") 1.5 hr
+                                //- div(class=" col-xs-12")
+                                //-     div(class="time-line wait-time-line")
+                                //-     div(class="duration wait-duration") 30 min
+                div(class="col-md-6 col-sm-12 col-xs-12") 
+                    div(class="row")
+                        div(class="col-md-12 col-sm-12 col-xs-12")
+                            div(id="map",class="center margin-botton exp-map")
+                    //- div(class="row")
+                    //-      div(class="col-md-12 col-sm-12 col-xs-12 text-right")
+                    //-         a(id="clearMap",class="flat-btn btn-b",type="submit") clearMap
+                    div(class="row map-control")
+                        div(class="col-md-4 col-sm-4 col-xs-4")
+                            div(class="row")                        
+                                div(class="col-md-6 col-sm-6 col-xs-6")
+                                    input(type="number",class="form-control",id="circle_km",placeholder="km",value="15")
+                                div(class="col-md-6 col-sm-6 col-xs-6")
+                                    label(class="switch")
+                                        input(id="circle_gate",type="checkbox")
+                                        span(class="slider round")
+                        div(class="col-md-3 col-sm-3 col-xs-3")
+                            select(id="icon_color" class="form-control")
+                                option(id="green",selected="selected") green
+                                option(id="blue") blue
+                                option(id="red") red
+                                option(id="yellow") yellow
+                        div(class="col-md-3 col-sm-3 col-xs-3")
+                            select(id="edge_color" class="form-control")
+                                option(id="green",selected="selected") green
+                                option(id="blue") blue
+                                option(id="red") red
+                                option(id="yellow") yellow
+                        div(class="col-md-2 col-sm-2 col-xs-2")
+                            //- button(type="button",class="btn btn-default ",id="clearMap") clearMap
+                            a(id="clearMap",class="flat-btn btn-b",type="submit") clearMap
+                    hr
+                    div(class="row center")
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                div(class="col-xs-8 text-center") 
+                                    textarea(class="form-control",rows="5",id="query_str",placeholder="query")
+                                 div(class="col-xs-4 text-center")
+                                    div(class="row margin-botton")
+                                        select(id="query_template" class="form-control")
+                                            option(id="query_str_name",selected="selected") name
+                                            option(id="query_str_or") or
+                                            option(id="query_str_rating") rating
+                                    div(class="row")
+                                        a(id="show_query_str",class="flat-btn btn-b",type="submit") Show
+                    hr
+                    div(class="row center")
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                //- div(class="col-xs-5 text-center") 
+                                //-     h4 query_byID
+                                div(class="col-xs-8 text-center") 
+                                    input(type="text",class="form-control",id="query_byID_str",placeholder="_id")
+                                div(class="col-xs-4 text-center")
+                                    a(id="show_query_byID_str",class="flat-btn btn-b",type="submit") Show
+                    hr                    
+                    div(class="row center")
+                        div(class=" col-xs-12")
+                            div(class="row center")
+                                div(class="col-xs-8 text-center")
+                                    input(type="text",class="form-control margin-botton",id="pair_from_id",placeholder="from_id",value="59e5a89bd63dcb19ac984cff")
+                                    input(type="text",class="form-control margin-botton",id="pair_to_id",placeholder="to_id",value="59e5a928d63dcb19ac985abc")
+                                div(class="col-xs-4 text-center")
+                                    a(id="show_pair",class="flat-btn btn-b",type="submit") Pair
+                            div(class="row center")
+                                div(class="col-xs-8")
+                                    pre(id="pair_console")
+                    hr
+                    div(class="row")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            input(type="text",class="form-control",id="exceptEdgeDB" placeholder="exceptEdgeDB" value="finaldata_except")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            input(type="text",class="form-control",id="exceptEdgeColl" placeholder="exceptEdgeColl" value="yilanpairwise_all")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            input(type="text",class="form-control",id="exceptEdgeRange" placeholder="exceptEdgeRange" value="0,10")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            a(id="ShowExceptEdge",class="flat-btn btn-b",type="submit") Show exceptEdge
+                    hr
+                    div(class="row")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            select(id="area_color" class="form-control")
+                                option(id="green",selected="selected") green
+                                option(id="blue") blue
+                                option(id="red") red
+                                option(id="yellow") yellow
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            input(type="text",class="form-control",id="ltop" placeholder="ltop" value="24.746379560784863,121.75150181745687")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            input(type="text",class="form-control",id="rbottom" placeholder="rbottom" value="24.676829775446404,121.79647709821859")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            a(id="ShowExceptArea",class="flat-btn btn-b",type="submit") Show exceptArea
+                    hr
+                    div(class="row")
+                        div(class="col-md-3 col-sm-3 col-xs-6")
+                            a(id="ShowVD",class="flat-btn btn-b",type="submit") Show VD
+                    hr
+                    
+
+            hr
+            br
+        Script.
+            let  maptool = new mapTool();
+            maptool.initMap();
+            domEvent.sess = !{JSON.stringify(sess)}
+            let domevent = new domEvent(maptool);
+            
+
+          
+
+
+
+                    

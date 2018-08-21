@@ -1,0 +1,30 @@
+:root{
+    --userPath-area-width:110px;
+    --header-padding-right:40px;
+}
+.userPath-area{
+    width: var(--userPath-area-width);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 60px;
+    right: 0px;
+    background-color: white;
+}
+.path{
+    width: var(--userPath-area-width);
+    margin-top: 5px;
+    text-align: center;
+    font-size: 15px;
+}
+.path:last-child{
+    margin-bottom: 5px;
+}
+.path:hover{
+    background-color: #646464;
+    color: white;
+}
+.path:active{
+    background-color: #363636;
+}

@@ -1,0 +1,42 @@
+doctype html
+//- refernce http://roundsliderui.com/playground.html
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato')
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+
+        link(rel='stylesheet', href='public/style/roundslider.min.css')
+        link(rel='stylesheet', href='public/style/custom_roundslider.css')
+        script(type="text/javascript",src="public/js/roundslider.min.js")
+    body
+        div hello world
+
+        div(id="slider")
+
+    Script.
+        $(document).ready(function () {
+            $("#slider").roundSlider({
+                sliderType: "min-range",
+                width: 24,
+                handleSize: "+13",
+                radius: 100,
+                value: 5,
+                max: "20",
+                editableTooltip: false,
+                keyboardAction: false,
+                startAngle: 89,
+                handleShape: "dot",
+
+                change: function (args) {
+                    // handle the change event here
+                }
+            });
+        });
+          
+
+
+
+                    

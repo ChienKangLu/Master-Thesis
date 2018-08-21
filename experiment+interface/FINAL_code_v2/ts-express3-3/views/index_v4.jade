@@ -1,0 +1,433 @@
+doctype html
+html
+    head
+        title #{title}
+        meta(name="viewport",content="width=device-width, initial-scale=1")
+        script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwubdsvqdwPKbJbzlHs0PTLKjdNcqRy8s")
+        script(type="text/javascript",src="js/mapTool.js")
+        script(type="text/javascript",src="js/ajax.js")
+        script(type="text/javascript",src="js/mapArea.js")
+        script(type="text/javascript",src="js/domEvent.js")
+        script(type="text/javascript",src="js/createDom.js")
+        script(type="text/javascript",src="js/tool/Time.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        script(type="text/javascript",src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u",crossorigin="anonymous")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css",integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp",crossorigin="anonymous")
+        script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ,integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" ,crossorigin="anonymous")
+        link(rel='stylesheet', href='public/style/layout.css')
+        link(rel='stylesheet', href='public/style/switch.css')
+        link(rel='stylesheet', href='public/style/lineSlider.css')
+        link(rel='stylesheet', href='public/style/svgStyle.css')
+        link(rel='stylesheet', href='public/style/route-area.css')
+        link(rel='stylesheet', href='public/style/recomd-area.css')
+        link(rel='stylesheet', href='public/style/delete-area.css')
+        link(rel='stylesheet', href='public/style/title.css')
+        link(rel='stylesheet', href='public/style/tooltip_custom.css')
+        link(rel='stylesheet', href='public/style/alert-area.css')
+        link(rel='stylesheet', href='public/style/loading.css')
+        link(rel='stylesheet', href='public/style/mapTool-area.css')
+        link(rel='stylesheet', href='public/style/login-area.css')
+        link(rel='stylesheet', href='public/style/userPath-area.css')
+        
+        
+        link(rel='stylesheet', href='public/style/roundslider.min.css')
+        link(rel='stylesheet', href='public/style/custom_roundslider.css')
+        link(rel='stylesheet', href='public/style/v4_layout.css')
+        link(rel='stylesheet', href='public/style/edit.css')
+        script(type="text/javascript",src="public/js/roundslider.min.js")
+    body()
+        div(id="map",class="map-v3")
+        div(class="header-content")
+            div(class="header")
+                div Trip Planning
+                    //- span(class="header-small-txt") online
+            div(class="user-header")
+                if sess.login
+                    div(class="user-header-item" id="userName") #{sess.name} 您好!
+                else
+                    div(class="user-header-item" id="userName") 遊客 您好!
+                if sess.login
+                    div(class="user-header-item" id="userPath") 
+                        div(class="userPath-title") 旅遊紀錄
+                        div(class="userPath-area hidden")
+                            //- div(class="path") 路線1
+                            //- div(class="path") 路線2
+                            //- div(class="path") 路線3
+                            //- div(class="path") 路線4
+                if sess.login
+                    div(class="user-header-item" id="logoutBtn" class="loginOutBtn") 登出
+                else
+                    div(class="user-header-item" id="loginBtn" class="loginOutBtn") 登入
+
+        div(id="mapTool-area")
+            img(id="mapTool",src="public/img/mapTool.svg")
+            img(id="mapArea",class="hidden",src="public/img/mapArea.svg")
+            img(id="mapClear",class="hidden",src="public/img/mapClear.svg")
+        div(id="alert-area" class="alert-area hidden") 
+            div(class="alert-box")
+                div(class="alert-icon")
+                    img(id="alert_icon_remind",class="alert_icon_remind",src="public/img/alert_icon_remind.svg")
+                div(class="alert-title")
+                div(class="alert-describe")
+                div(class="understand remind-color" ) 知道了
+        div(id="login-area" class="login-area hidden") 
+            div(class="login-box")
+                div(class="login-icon")
+                    img(id="login_icon_remind",class="login_icon_remind",src="public/img/alert_icon_remind.svg")
+                input(id="account",type="text",class="beauty-input",placeholder="Account")
+                input(id="password",type="text",class="beauty-input",placeholder="Password")
+                div(id="login",class="understand remind-color" ) 登入
+
+        div(class="main-flex-container")
+            div(class="tool-area")
+                div(class="icon-tooltip")
+                    img(id="datetime",class="datetime self-icon icon-active",src="public/img/datetime.svg")
+                    div(class="icon-tooltip-text") 時間地點
+                div(class="icon-tooltip")
+                    img(id="poi",class="poi self-icon",src="public/img/poi.svg")
+                    div(class="icon-tooltip-text") 景點數量
+                div(class="icon-tooltip")
+                    img(id="gear",class="gear self-icon",src="public/img/gear.svg")
+                    div(class="icon-tooltip-text") 滿意參考
+                div(class="icon-tooltip")
+                    img(id="note",class="note self-icon",src="public/img/note.svg")
+                    div(class="icon-tooltip-text") 路線規劃
+                div(class="icon-tooltip")
+                    img(id="analysis",class="analysis self-icon",src="public/img/analysis.svg")
+                    div(class="icon-tooltip-text") 搜尋分析
+
+            div(class="container op-area basic-area")
+                div(class="row date")
+                    div(class="col-xs-12 font-input-group")
+                        div(class="myFont") Start
+                        input(type="datetime-local",class="form-control",id="start_time",value="2017-11-30T08:00:00")
+                div(class="row date")
+                    div(class="col-xs-12 font-input-group")
+                        div(class="myFont") End
+                        input(type="datetime-local",class="form-control",id="end_time",value="2017-11-30T20:00:00")
+                div(class="row where mobile-poi")
+                    div(class="col-xs-12 font-input-group")
+                        div(class="myFont") From
+                        select(id="start_id_mobile" class="form-control")
+                            each value, key in pois
+                                if(value._id=="59e5a921d63dcb19ac9859fc")
+                                    option(id=value._id,selected="selected")=value.name
+                                else
+                                    option(id=value._id) #{key+1} #{value.name}
+                div(class="row where pc-poi")
+                    div(class="col-xs-12 font-input-group")
+                        div(class="myFont") From
+                        input(type="text" name="team" id="start_id_pc" list="start_list" class="form-control" value="宜蘭車站") 
+                        datalist(id="start_list")
+                            each value, key in pois
+                                option(id=value._id) #{value.name} 
+                div(class="row where mobile-poi")
+                    div(class="col-xs-12 font-input-group")
+                        div(class="myFont") To
+                        select(id="destination_id_mobile" class="form-control")
+                            each value, key in pois
+                                if(value._id=="59e5a84dd63dcb19ac984571")
+                                    option(id=value._id,selected="selected")=value.name
+                                else
+                                    option(id=value._id) #{key+1} #{value.name}     
+                div(class="row where pc-poi")
+                    div(class="col-xs-12 font-input-group")
+                        div(class="myFont") To
+                        input(type="text" name="team" id="destination_id_pc" list="destination_list" class="form-control" value="養蜂人家-蜂采館") 
+                        datalist(id="destination_list")
+                            each value, key in pois
+                                option(id=value._id) #{value.name} 
+                div(class="row text-right")
+                    a(id="search-v3",class="flat-btn btn-b",type="submit") search      
+            div(class="op-area poi-area hidden")
+                //- div(class="row")
+                //-     div(class="col-md-12 col-sm-12 col-xs-12")
+                div(id="range-title" class="title") 今天想玩幾個景點呢?
+                    div(class="tooltip_custom")
+                        img(class="questionMark",src="public/img/questionMark.svg")
+                        span(class="tooltiptext tooltip-bottom") 系統將會根據您所選擇「景點數目」找尋最佳的旅遊路線。
+                    //- img(id="",class="questionMark",src="public/img/questionMark.svg")
+                input(type="range",min="2",max="7",value="3",step="1",class="lineSlider center",id="myRange")
+                //- div(class="text-center")
+                ul(class="range-labels")
+                    li 2
+                    li(class="active") 3
+                    li 4
+                    li 5
+                    li 6
+                    li 7
+                //- hr(class="divide")
+            div(class="op-area satf-area hidden")
+                div(class="satf-area-flex-contaioner")
+                    div(class="")
+                        div(id="attraction-title" class="title") 熱門度
+                            div(class="tooltip_custom")
+                                img(class="questionMark",src="public/img/questionMark.svg")
+                                span(class="tooltiptext tooltip-bottom") 「熱門度」的「滿意度參考值」範圍從0到5，系統將優先選擇「熱門度」大於您所設定的「滿意度參考值」的景點。
+                        div(id="slider-attracion",class="center")
+                    div(class="")
+                        div(id="distance-title" class="title") 距離
+                            div(class="tooltip_custom")
+                                img(class="questionMark",src="public/img/questionMark.svg")
+                                span(class="tooltiptext tooltip-bottom") 「距離」的「滿意度參考值」範圍從1到40公里，系統將優先選擇「距離」小於您所設定的「滿意度參考值」的景點。
+                        div(id="slider-distance",class="center")
+                    div(class="")
+                        div(id="traveltime-title" class="title") 行車時間
+                            div(class="tooltip_custom")
+                                img(class="questionMark",src="public/img/questionMark.svg")
+                                span(class="tooltiptext tooltip-bottom") 「行車時間」的「滿意度參考值」範圍從0.1到2小時，系統將優先選擇「行車時間」小於您所設定的「滿意度參考值」的景點。
+                        div(id="slider-traveltime",class="center")
+                    
+                //- hr(class="divide")         
+            div(class="op-area route-area hidden")
+                div(class="edit-path-container")
+                    div(class="edit-container")
+                    
+                        if sess.login
+                            input(id="path-name",type="text",placeholder="幫路線取個名字")
+                            div(class="route-icon-tooltip")
+                                img(id="save",class="save edit-switch",src="public/img/save.svg")
+                                div(class="route-icon-tooltip-text") 儲存路線
+                        div(class="route-icon-tooltip")
+                            img(id="pencil",class="pencil edit-switch",src="public/img/pencil.svg")
+                            div(class="route-icon-tooltip-text") 修改路線
+                        div(class="route-icon-tooltip")
+                            img(id="runAgain",class="runAgain edit-switch",src="public/img/runAgain.svg")
+                            div(class="route-icon-tooltip-text") 重新搜尋
+                        div(class="route-icon-tooltip")
+                            img(id="lens",class="lens edit-switch",src="public/img/lens.svg")
+                            div(class="route-icon-tooltip-text") 推薦景點
+                        div(class="route-icon-tooltip")
+                            img(id="deletePoi",class="deletePoi edit-switch",src="public/img/deletePoi.svg")
+                            div(class="route-icon-tooltip-text") 刪除景點
+                    div(id="show-path-empty")
+                        div(class="manual")
+                            div(class = "step")
+                                div(class="step-number") Step1:
+                                div(class="manual-title") 設定旅遊的時間和起始景點。
+                            div(class="step")
+                                div(class="step-number") Step2:
+                                div(class="manual-title") 選擇要玩幾個景點。
+                            div(class="step")
+                                div(class="step-number") Step3:
+                                div(class="manual-title") 設定熱門度、距離、行車時間的滿意參考值。
+                        div(id="start-plan" class="start-plan") 規劃路線
+                    div(id="loading" class="hidden")
+                        div(class="loading-area")
+                            div(class="load-text") 搜尋中
+                            img(id="searching",class="searching",src="public/img/searching.svg")
+                    div(id="show_path",class="path-block connectedSortable")
+                        //- #a1.time-poi-block
+                        //-     .time-stamp.time-stamp-top
+                        //-         .time-block.time-block-green  08:00:00
+                        //-         .time-line.time-line-green
+                        //-     .time-stamp.time-stamp-bottom
+                        //-         .time-block.time-block-green  09:00:00
+                        //-         .time-line.time-line-green
+                        //-     .poi-block
+                        //-         //- img(id="remove",class="editElemt remove",src="public/img/remove.svg",data-poi-id="a1")
+                        //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a1" class="editElemt remove")
+                        //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                        //-             g
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                        //-         .poi-title  &#x5B9C;&#x862D;&#x8ECA;&#x7AD9;
+                        //-         .poi-top-info.visit-hour.push  1 hr
+                        //-         .poi-top-info.poi-rating  4.2
+                        //- .duration-time-stamp
+                        //-     .time-line.right-line.travel-time-line
+                        //-     .duration.travel-duration  4 min
+                        //-     .duration.travel-duration  0.8km
+
+
+                        //- #a2.time-poi-block
+                        //-     .time-stamp.time-stamp-top
+                        //-         .time-block.time-block-green  09:04:46
+                        //-         .time-line.time-line-green
+                        //-     .time-stamp.time-stamp-bottom
+                        //-         .time-block.time-block-green  10:04:46
+                        //-         .time-line.time-line-green
+                        //-     img(class="path-poi" id="path-poi0",src="public/img/marker_black_small_no_border.svg")
+                        //-     div(class="path-poi-num") S
+                        //-     .poi-block
+                        //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a2" class="editElemt remove")
+                        //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                        //-             g
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")             
+                        //-         .poi-title  &#x96D9;&#x9023;&#x57E4;
+                        //-         .poi-top-info.visit-hour.push  1 hr
+                        //-         .poi-top-info.poi-rating  4.6
+
+
+                        //- .duration-time-stamp
+                        //-     .time-line.right-line.travel-time-line
+                        //-     .duration.travel-duration  4 min
+                        //-     .duration.travel-duration  0.8km
+
+                        //- #a3.time-poi-block
+                        //-     img(class="path-poi" id="path-poi1",src="public/img/marker_green_small_no_border.svg")
+                        //-     div(class="path-poi-num") 1
+                        //-     .time-stamp.time-stamp-top
+                        //-         .time-block.time-block-green  10:09:08
+                        //-         .time-line.time-line-green
+                        //-     .time-stamp.time-stamp-bottom
+                        //-         .time-block.time-block-green  11:09:08
+                        //-         .time-line.time-line-green
+                        //-     .poi-block
+                        //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a3" class="editElemt remove")
+                        //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                        //-             g
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                        //-         .poi-title  &#x5B9C;&#x862D;&#x8A2D;&#x6CBB;&#x7D00;&#x5FF5;&#x9928;
+                        //-         .poi-top-info.visit-hour.push  1 hr
+                        //-         .poi-top-info.poi-rating  4.2
+
+
+                        //- .duration-time-stamp
+                        //-     .time-line.right-line.travel-time-line
+                        //-     .duration.travel-duration  11 min
+                        //-     .duration.travel-duration  3.6km
+                        //- #a4.time-poi-block
+                        //-     .time-stamp.time-stamp-top
+                        //-         .time-block.time-block-green  11:20:18
+                        //-         .time-line.time-line-green
+                        //-     .time-stamp.time-stamp-bottom
+                        //-         .time-block.time-block-green  13:20:18
+                        //-         .time-line.time-line-green
+                        //-     .poi-block
+                        //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a4" class="editElemt remove")
+                        //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                        //-             g
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                        //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                                
+                        //-         .poi-title  &#x990A;&#x8702;&#x4EBA;&#x5BB6;-&#x8702;&#x91C7;&#x9928;
+                        //-         .poi-top-info.visit-hour.push  2 hr
+                        //-         .poi-top-info.poi-rating  4.1
+            div(class="container op-area analysis-area hidden")
+                div(class="row console-block center")
+                    div(class=" col-xs-12")
+                        div(class="row console-row")
+                            div(class="col-xs-5") 
+                                b(class="text") Search Time
+                            div(class="col-xs-7") 
+                                div(id="excutionTime",class="text-center text") -
+                    div(class=" col-xs-12")
+                        div(class="row console-row")
+                            div(class="col-xs-5") 
+                                b(class="text")  Atraction
+                            div(class="col-xs-7") 
+                                div(id="total_attraction",class="text-center text") -
+                    div(class=" col-xs-12")
+                        div(class="row console-row")
+                            div(class="col-xs-5") 
+                                b(class="text") Distance
+                            div(class="col-xs-7") 
+                                div(id="total_distance",class="text-center text") -
+                    div(class=" col-xs-12")
+                        div(class="row console-row")
+                            div(class="col-xs-5") 
+                                b(class="text")  TravelTime
+                            div(class="col-xs-7") 
+                                div(id="total_travelTime",class="text-center text") -
+                    div(class=" col-xs-12")
+                        div(class="row console-row")
+                            div(class="col-xs-5") 
+                                b(class="text")  Duration
+                            div(class="col-xs-7") 
+                                div(id="trip_duration",class="text-center text") -
+            div(class="recomd-area hidden")
+                div(class="recomd-area-title title") 景點推薦
+                div(class="explore-div")
+                    img(id="explore",class="explore",src="public/img/explore.svg")
+                    div(class="explore-text") 尋找景點
+                div(id="random-poi",class="recomd-poi-block random-poi",data-poi={"id":"random","name":"random"})
+                    div(class="random_block") 幫我推薦吧
+                        svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a8" class="editElemt random-remove remove")
+                            circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                            g
+                                rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                                rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                
+                div(id="recomd-area",class="connectedSortable")
+                    //- #a8.recomd-poi-block
+                    //-     .poi-block
+                    //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a8" class="editElemt remove")
+                    //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                    //-             g
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                    //-         .poi-title  西門
+                    //-         .poi-top-info.visit-hour.push  1 hr
+                    //-         .poi-top-info.poi-rating  4.6
+                    //- #a9.recomd-poi-block
+                    //-     .poi-block
+                    //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a9" class="editElemt remove")
+                    //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                    //-             g
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                                    
+                    //-         .poi-title  老松國小
+                    //-         .poi-top-info.visit-hour.push  1 hr
+                    //-         .poi-top-info.poi-rating  4.6
+                    //- #a10.recomd-poi-block
+                    //-     .poi-block
+                    //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a10" class="editElemt remove")
+                    //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                    //-             g
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                                    
+                    //-         .poi-title  東吳大學
+                    //-         .poi-top-info.visit-hour.push  1 hr
+                    //-         .poi-top-info.poi-rating  4.6      
+            div(class="delete-area hidden")
+                div(class="delete-area-title title") 不想經過    
+                div(id="delete-poi-area",class="connectedSortable")
+                    //- #a8.recomd-poi-block
+                    //-     .poi-block
+                    //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a8" class="editElemt remove")
+                    //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                    //-             g
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")
+                    //-         .poi-title  西門
+                    //-         .poi-top-info.visit-hour.push  1 hr
+                    //-         .poi-top-info.poi-rating  4.6
+                    //- #a2.time-poi-block
+                    //-     .time-stamp.time-stamp-top
+                    //-         .time-block.time-block-green  09:04:46
+                    //-         .time-line.time-line-green
+                    //-     .time-stamp.time-stamp-bottom
+                    //-         .time-block.time-block-green  10:04:46
+                    //-         .time-line.time-line-green
+                    //-     img(class="path-poi" id="path-poi0",src="public/img/marker_black_small_no_border.svg")
+                    //-     div(class="path-poi-num") S
+                    //-     .poi-block
+                    //-         svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="remove" x="0px" y="0px" width="24.809px" height="24.808px" viewBox="0 0 24.809 24.808" xml:space="preserve" data-poi-id="a2" class="editElemt remove")
+                    //-             circle(style="fill:#E72C19;" cx="12.404" cy="12.404" r="12.404")
+                    //-             g
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1377 12.4045)" style="fill:#FFFFFF;" width="17" height="3.125")
+                    //-                 rect(x="3.904" y="10.841" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.4043 29.9458)" style="fill:#FFFFFF;" width="17" height="3.125")             
+                    //-         .poi-title  &#x96D9;&#x9023;&#x57E4;
+                    //-         .poi-top-info.visit-hour.push  1 hr
+                    //-         .poi-top-info.poi-rating  4.6
+        Script.
+            let  maptool = new mapTool();
+            maptool.initMap();
+            //- domEvent.sess = !{JSON.stringify(sess)}
+            let domevent = new domEvent(maptool);
+            if(!{sess.login})
+                ajax.showRoute(maptool,"!{sess._id}");
+
+            
+
+          
+
+
+
+                    

@@ -1,0 +1,73 @@
+/*參考：https://stackoverflow.com/questions/33746161/why-doesnt-this-svg-fit-inside-its-parent-div-for-small-div-sizes*/
+:root{
+    --mapTool-width: 47.885px;
+    --mapTool-height: 47.885px;
+    --mapTool-area-margin: 18px;
+}
+#mapTool-area{
+    position: absolute;
+    /* background-color: white; */
+    top: calc( 100% - var(--mapTool-height) - var(--mapTool-area-margin) );
+    left: calc( 100% - var(--mapTool-width) - var(--mapTool-area-margin) );
+    border-radius: 50%;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+    transition: .2s;
+}
+
+/*svg 預設 display是inline，超過寬度的內容會換行，造成容器的div會莫名其妙多一行，改成block即可解決*/
+#mapTool{
+    display: block;
+    cursor: pointer;
+}
+#mapTool:hover .bg{
+    fill: #404040 !important;
+}
+#mapTool:active .bg{
+    fill: #1f1f1f !important;
+}
+
+
+#mapArea{
+    top: -60px;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    transition: .2s;
+}
+#mapArea:hover .bg{
+    fill: #404040 !important;
+}
+#mapArea:active .bg{
+    fill: #1f1f1f !important;
+}
+#mapArea:hover .line polyline{
+    stroke: white !important;
+}
+#mapArea:hover .line line{
+    stroke: white !important;
+}
+#mapArea:hover .face {
+    fill: white !important;
+}
+
+#mapClear{
+    top: -120px;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    transition: .2s;
+}
+#mapClear:hover .bg{
+    fill: #404040 !important;
+}
+#mapClear:active .bg{
+    fill: #1f1f1f !important;
+}
+#mapClear:hover .line{
+    stroke: white !important;
+}
+#mapClear:hover .face {
+    fill: white !important;
+}

@@ -1,0 +1,102 @@
+:root {
+    --time-line-width:15px;
+    --time-poi-block-margin:7px;
+}
+.recomd-area-title{
+    margin-left: var(--time-line-width);
+    margin-bottom: 0px !important;
+}
+.recomd-area{
+    width:15% !important;
+    overflow-y: scroll;
+    min-width: 200px;
+    max-height: 350px !important;
+    /* background: rgba(255, 255, 255, 1); */
+    background-color: #ffffff;/* #8a8a8a;*/
+    border-radius: 10px;
+    /* border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px; */
+    box-shadow: 3px 0px 20px rgba(0, 0, 0, .5);
+    /* margin-left: auto; */
+    margin-left: 4px;
+    /* margin-right: 10px; */
+    margin-top: 10px;
+    pointer-events:auto !important;
+    padding-right: var(--time-line-width);
+    padding-top:5px;
+    
+}
+#recomd-area{
+    min-height: 100px;
+}
+.recomd-poi-block{
+    margin-bottom: var(--time-poi-block-margin);
+    margin-left: var(--time-line-width);
+    background-color:#f4f4f4; /* white;*/
+    border:2px dashed  #000000;;/* #8a8a8a;*/
+    border-radius: 6px;
+    color: #000000;
+    font-size:15px;
+    font-family: Microsoft YaHei;
+    font-weight: 600;    
+    cursor: pointer;
+}
+.recomd-area::-webkit-scrollbar {
+    display:none
+}
+.random_block{
+    margin: 10px;
+    text-align: center;
+    position: relative;
+}
+.random-remove{
+    position: absolute;
+    left: 0;
+    top: -2px;
+}
+.explore-div{
+    text-align: center;
+    margin-left: var(--time-line-width);
+}
+.explore{
+    cursor: pointer;
+    transition:.2s;
+    margin-top: 10px;
+    padding: 3px;
+    /* margin-bottom: 2px; */
+}
+.explore-text{
+    margin-top: -8px;
+    color: #000000;
+    font-size:15px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;    
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    transition:.2s;
+    
+}
+.explore:hover{
+    transform: scale(1.2);
+}
+.explore:hover path{
+   animation: shake 1s ease-in-out 0.1s infinite alternate;
+}
+.explore:hover + .explore-text{
+    font-weight: 600; 
+    letter-spacing: 4px;
+}
+@keyframes shake{
+    from {
+        -webkit-transform: rotate(10deg);
+    }
+    to {
+       -webkit-transform-origin:center center;
+       -webkit-transform: rotate(-10deg);
+     }
+}
+.recomd-area .path-poi,.recomd-area .time-stamp,.recomd-area .path-poi-num{
+    display: none !important;
+}
