@@ -5,7 +5,8 @@ Trip planning that may integrate diverse information sources to meet travelersâ€
 _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidden Markov model_
 
 ## System Demo 
-
+<a href="https://www.youtube.com/watch?v=62v6cuF5I-0" target="_blank"><img src="http://img.youtube.com/vi/62v6cuF5I-0/0.jpg" 
+alt="Mobile demo" width="240" height="180" border="10" /></a>
 ## Reference
 [Backward Heuristic and Satisfaction-based Multiobjectives Optimization for A* Search on Trip Planning (Full-Text)](http://etheses.lib.ntust.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=B1WIII/record?r1=1&h1=2)
 
