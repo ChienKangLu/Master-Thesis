@@ -7,7 +7,7 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
 ## Implementation
 + Use **TypeScript** to implement all algorithms in this paper
 + Use **Node.js** as Server
-+ Save all data in **Mongodb**
++ Database is **Mongodb**
 
 ## System Demo 
 <a href="https://www.youtube.com/watch?v=62v6cuF5I-0" target="_tab"><img src="http://img.youtube.com/vi/62v6cuF5I-0/0.jpg" 
