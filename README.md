@@ -1,6 +1,6 @@
 # Backward Heuristic and Satisfaction-based Multiobjectives Optimization for A* Search on Trip Planning
 This is my Master's Thesis. I got master’s degree in **information management** from the National Taiwan University of Science and Technology on August 20, 2018.
-
+ 
 ## Develop tools and techniques
 + Use **TypeScript** to implement all algorithms in this paper
 + Use **Node.js** as Server
