@@ -23,26 +23,28 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
   <td>Select number of POIs</td>
   <td>Set satisfication for each trip factor</td>
  </tr>
+</table>
+<table>
  <tr>
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/search.png" /></td>
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/alter.png" /></td>
-  <td></td>
  </tr>
  <tr>
   <td>Search</td>
   <td>Adjust trip</td>
-  <td></td>
  </tr>
+</table>
+<table>
  <tr>
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/recomd.png" /></td>
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/area_recomd.png" /></td>
-  <td></td>
  </tr>
  <tr>
   <td>Recommand nearby POIs</td>
   <td>Recommand by area</td>
-  <td></td>
  </tr>
+</table>
+<table>
  <tr>
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search.png" /></td>
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search_result.png" /></td>
@@ -51,7 +53,7 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
   <td>Restrict search</td>
   <td>Restrict search result</td>
  </tr>
-<table>
+</table>
  
 ## System Demo 
 <a href="https://www.youtube.com/watch?v=62v6cuF5I-0" target="_tab"><img src="http://img.youtube.com/vi/62v6cuF5I-0/0.jpg" 
