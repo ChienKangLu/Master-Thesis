@@ -12,17 +12,47 @@ Trip planning that may integrate diverse information sources to meet travelersâ€
 _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidden Markov model_
 
 ## Screenshots
-
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/datetime.png" /> <br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/length.png" /><br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/satification.png" /><br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/search.png" /><br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/alter.png" /><br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/area_recomd.png" /><br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/recomd.png" /><br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search.png" /><br/>
-<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search_result.png" />
-
+<table>
+ <tr>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/datetime.png" /></td>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/length.png" /></td>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/satification.png" /></td>
+ </tr>
+ <tr>
+  <td>Set date and time</td>
+  <td>Select number of POIs</td>
+  <td>Set satisfication for each trip factor</td>
+ </tr>
+ <tr>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/search.png" /></td>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/alter.png" /></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>Search</td>
+  <td>Adjust trip</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/recomd.png" /></td>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/area_recomd.png" /></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>Recommand nearby POIs</td>
+  <td>Recommand by area</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search.png" /></td>
+  <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search_result.png" /></td>
+ </tr>
+ <tr>
+  <td>Restrict search</td>
+  <td>Restrict search result</td>
+ </tr>
+<table>
+ 
 ## System Demo 
 <a href="https://www.youtube.com/watch?v=62v6cuF5I-0" target="_tab"><img src="http://img.youtube.com/vi/62v6cuF5I-0/0.jpg" 
 alt="Mobile demo" width="240" height="180" border="10" /></a>
