@@ -19,9 +19,9 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/satification.png" /></td>
  </tr>
  <tr>
-  <td>Set date and time</td>
-  <td>Select number of POIs</td>
-  <td>Set satisfication for each trip factor</td>
+  <td align="center">Set date and time</td>
+  <td align="center">Select number of POIs</td>
+  <td align="center">Set satisfication for each trip factor</td>
  </tr>
 </table>
 <table>
@@ -30,8 +30,8 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/alter.png" /></td>
  </tr>
  <tr>
-  <td>Search</td>
-  <td>Adjust trip</td>
+  <td align="center">Search</td>
+  <td align="center">Adjust trip</td>
  </tr>
 </table>
 <table>
@@ -40,8 +40,8 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/area_recomd.png" /></td>
  </tr>
  <tr>
-  <td>Recommand nearby POIs</td>
-  <td>Recommand by area</td>
+  <td align="center">Recommand nearby POIs</td>
+  <td align="center">Recommand by area</td>
  </tr>
 </table>
 <table>
@@ -50,8 +50,8 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
   <td><img src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search_result.png" /></td>
  </tr>
  <tr>
-  <td>Restrict search</td>
-  <td>Restrict search result</td>
+  <td align="center">Restrict search</td>
+  <td align="center">Restrict search result</td>
  </tr>
 </table>
  
