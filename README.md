@@ -13,6 +13,15 @@ _**Key words:** A* algorithm, Multi-objective optimization, Trip planning, Hidde
 
 ## Screenshots
 
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/datetime.png" /> <br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/length.png" /><br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/satification.png" /><br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/search.png" /><br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/alter.png" /><br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/area_recomd.png" /><br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/recomd.png" /><br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search.png" /><br/>
+<img height="200" src="https://github.com/ChienKangLu/Master-Thesis/blob/master/img/restrict_search_result.png" />
 
 ## System Demo 
 <a href="https://www.youtube.com/watch?v=62v6cuF5I-0" target="_tab"><img src="http://img.youtube.com/vi/62v6cuF5I-0/0.jpg" 
